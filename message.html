@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 80%;
+            height: 100px;
+            margin: 20px 0;
+            font-size: 1rem;
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background: #0074d9;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <h1>写下你的留言</h1>
+    <textarea id="message" placeholder="在这里输入你的留言..."></textarea><br>
+    <button onclick="submitMessage()">提交留言</button>
+
+    <script>
+        function submitMessage() {
+            const message = document.getElementById('message').value;
+            if (message) {
+                // 模拟保存到数据库（目前保存在本地）
+                alert('留言已提交：' + message);
+                // 重定向到你的主页
+                window.location.href = 'index.html';
+            } else {
+                alert('请先输入留言内容！');
+            }
+        }
+    </script>
+</body>
+</html>
