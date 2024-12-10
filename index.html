@@ -3,22 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>表白页面</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>圣诞树惊喜</title>
+    <style>
+        /* 页面整体样式 */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: url('YOUR_IMAGE_URL') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-top: 20px;
+            color: #ffe600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* 圣诞树容器 */
+        .tree-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 800px;
+            margin: 20px auto;
+        }
+
+        /* 树洞 */
+        .tree-hole {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: #442200;
+            border-radius: 50%;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            border: 2px solid #663300;
+        }
+
+        .tree-hole:hover {
+            transform: translateX(-50%) scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        /* 礼物样式 */
+        .gift {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: red;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gift:hover {
+            transform: scale(1.2);
+        }
+
+        /* 礼物位置 */
+        .gift-1 { top: 200px; left: 50%; transform: translateX(-180px); }
+        .gift-2 { top: 250px; left: 50%; transform: translateX(50px); }
+        .gift-3 { top: 320px; left: 50%; transform: translateX(-120px); }
+        .gift-4 { top: 400px; left: 50%; transform: translateX(120px); }
+        .gift-5 { top: 470px; left: 50%; transform: translateX(-50px); }
+        .gift-6 { bottom: 60px; left: 80px; }
+        .gift-7 { bottom: 60px; right: 80px; }
+
+        /* 弹出窗口样式 */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            display: none;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .modal h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .modal button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background: #0074d9;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background: #005bb5;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>亲爱的，</h1>
-        <p>这是我为你做的一个特别的表白页面，希望你喜欢！</p>
-    </header>
-    
-    <section class="story">
-        <h2>我们的故事</h2>
-        <p>在这里，你可以描述一下你们的爱情故事，回忆你们的第一次相遇、约会等。</p>
-    </section>
+    <h1>给我的圣诞礼物女孩</h1>
 
-    <footer>
-        <p>感谢你一直在我身边。我永远爱你！</p>
-    </footer>
+    <!-- 圣诞树容器 -->
+    <div class="tree-container">
+        <!-- 树洞 -->
+        <div class="tree-hole" onclick="showMessage()"></div>
+
+        <!-- 礼物 -->
+        <div class="gift gift-1" onclick="redirectTo('gift1')"></div>
+        <div class="gift gift-2" onclick="redirectTo('gift2')"></div>
+        <div class="gift gift-3" onclick="redirectTo('gift3')"></div>
+        <div class="gift gift-4" onclick="redirectTo('gift4')"></div>
+        <div class="gift gift-5" onclick="redirectTo('gift5')"></div>
+        <div class="gift gift-6" onclick="redirectTo('gift6')"></div>
+        <div class="gift gift-7" onclick="redirectTo('gift7')"></div>
+    </div>
+
+    <!-- 弹出窗口 -->
+    <div class="overlay" id="overlay"></div>
+    <div class="modal" id="modal">
+        <h2>给你的话：</h2>
+        <p>亲爱的，愿你每天都像圣诞树一样闪亮和温暖，无论相隔多远，我的心永远在你身边。</p>
+        <button onclick="closeModal()">关闭</button>
+    </div>
+
+    <script>
+        // 显示树洞留言
+        function showMessage() {
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        // 关闭模态框
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // 礼物点击跳转
+        function redirectTo(gift) {
+            alert(`跳转到礼物 ${gift} 的留言页面！`);
+            // 在这里设置具体跳转链接
+            // window.location.href = `https://example.com/${gift}`;
+        }
+    </script>
 </body>
 </html>
