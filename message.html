@@ -7,32 +7,27 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
             text-align: center;
             padding: 20px;
+            background: #f4f4f4;
         }
-
         textarea {
             width: 80%;
             height: 100px;
             margin: 20px 0;
             font-size: 1rem;
-            padding: 10px;
         }
-
         button {
             padding: 10px 20px;
             font-size: 1rem;
-            background: #0074d9;
-            color: #fff;
+            background-color: #0074d9;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
-
         button:hover {
-            background: #005bb5;
+            background-color: #005bb5;
         }
     </style>
 </head>
@@ -45,9 +40,8 @@
         function submitMessage() {
             const message = document.getElementById('message').value;
             if (message) {
-                // 模拟保存到数据库（目前保存在本地）
-                alert('留言已提交：' + message);
-                // 重定向到你的主页
+                alert(`留言提交成功：${message}`);
+                // 跳转回主页或显示提交成功页面
                 window.location.href = 'index.html';
             } else {
                 alert('请先输入留言内容！');
