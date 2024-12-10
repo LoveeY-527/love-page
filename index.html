@@ -2,156 +2,33 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>圣诞惊喜</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: url('https://s2.loli.net/2024/12/10/nwUFcGo9iWVP8bT.png') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-        }
-
-        h1 {
-            margin-top: 20px;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-
-        .tree-container {
-            position: relative;
-            margin: 0 auto;
-            width: 300px;
-            height: 500px;
-        }
-
-        .tree-hole {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 60px;
-            background: #442200;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-            border: 2px solid #663300;
-        }
-
-        .tree-hole:hover {
-            transform: translateX(-50%) scale(1.1);
-            transition: transform 0.3s ease;
-        }
-
-        .gift {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: red;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-            transition: transform 0.3s ease;
-        }
-
-        .gift:hover {
-            transform: scale(1.2);
-        }
-
-        /* 礼物位置 */
-        .gift-1 { top: 100px; left: 40px; }
-        .gift-2 { top: 150px; left: 120px; }
-        .gift-3 { top: 200px; left: 60px; }
-        .gift-4 { top: 250px; left: 160px; }
-        .gift-5 { top: 300px; left: 90px; }
-        .gift-6 { top: 350px; left: 140px; }
-
-        #mute-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        #mute-btn:hover {
-            background: rgba(255, 255, 255, 0.5);
-            color: black;
-        }
-    </style>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
 </head>
 <body>
     <h1>圣诞树上的惊喜</h1>
+    <div class="tree-hole" onclick="leaveMessage()"></div>
+    <div class="gift gift-1" onclick="viewMessage(1)"></div>
+    <!-- 更多礼物... -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "你的API密钥",
+            authDomain: "你的项目ID.firebaseapp.com",
+            databaseURL: "https://你的项目ID.firebaseio.com",
+            projectId: "你的项目ID",
+            storageBucket: "你的项目ID.appspot.com",
+            messagingSenderId: "发送者ID",
+            appId: "你的App ID"
+        };
 
-    <!-- 静音按钮 -->
-    <button id="mute-btn" onclick="toggleMute()">🔊</button>
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
 
-    <!-- 背景音乐 -->
-    <audio id="background-music" loop autoplay>
-        <source src="YOUR_MUSIC_URL" type="audio/mp3">
-        您的浏览器不支持音频播放。
-    </audio>
-
-    <!-- 圣诞树 -->
-    <div class="tree-container">
-        <!-- 树洞 -->
-        <div class="tree-hole" onclick="leaveMessage()"></div>
-
-        <!-- 礼物 -->
-        <div class="gift gift-1" onclick="viewMessage(1)"></div>
-        <div class="gift gift-2" onclick="viewMessage(2)"></div>
-        <div class="gift gift-3" onclick="viewMessage(3)"></div>
-        <div class="gift gift-4" onclick="viewMessage(4)"></div>
-        <div class="gift gift-5" onclick="viewMessage(5)"></div>
-        <div class="gift gift-6" onclick="viewMessage(6)"></div>
-    </div>
-
-  <!-- 引入 Firebase JS SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
-
-<script>
-  // 初始化 Firebase
-  const firebaseConfig = {
-      apiKey: "你的API密钥",
-      authDomain: "你的项目ID.firebaseapp.com",
-      databaseURL: "https://你的项目ID.firebaseio.com",
-      projectId: "你的项目ID",
-      storageBucket: "你的项目ID.appspot.com",
-      messagingSenderId: "你的发送者ID",
-      appId: "你的App ID"
-  };
-
-  // 确保先初始化 Firebase，再定义 `db`
-  const app = firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-</script>
-
-        // 静音功能
-        const music = document.getElementById('background-music');
-        function toggleMute() {
-            if (music.muted) {
-                music.muted = false;
-                document.getElementById('mute-btn').innerText = '🔊';
-            } else {
-                music.muted = true;
-                document.getElementById('mute-btn').innerText = '🔇';
-            }
-        }
-
-        // 树洞留言
         function leaveMessage() {
             window.location.href = 'message.html?gift=tree-hole';
         }
 
-        // 查看礼物留言
         function viewMessage(giftNumber) {
             db.ref(`messages/gift${giftNumber}`).once('value', (snapshot) => {
                 const data = snapshot.val();
