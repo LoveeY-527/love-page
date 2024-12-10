@@ -113,24 +113,26 @@
         <div class="gift gift-6" onclick="viewMessage(6)"></div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
-    <script>
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCiOIGb7-olcmwPf2PukDJFExvnYNfOU6c",
-  authDomain: "loveey-8090a.firebaseapp.com",
-  databaseURL: "https://loveey-8090a-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "loveey-8090a",
-  storageBucket: "loveey-8090a.firebasestorage.app",
-  messagingSenderId: "119161156412",
-  appId: "1:119161156412:web:88c0f409455c73df732439",
-  measurementId: "G-417PVHRW6Z"
-};
+  <!-- 引入 Firebase JS SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
 
-        // 初始化 Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
+<script>
+  // 初始化 Firebase
+  const firebaseConfig = {
+      apiKey: "你的API密钥",
+      authDomain: "你的项目ID.firebaseapp.com",
+      databaseURL: "https://你的项目ID.firebaseio.com",
+      projectId: "你的项目ID",
+      storageBucket: "你的项目ID.appspot.com",
+      messagingSenderId: "你的发送者ID",
+      appId: "你的App ID"
+  };
+
+  // 确保先初始化 Firebase，再定义 `db`
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+</script>
 
         // 静音功能
         const music = document.getElementById('background-music');
