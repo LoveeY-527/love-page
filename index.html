@@ -135,38 +135,38 @@
 
     // 初始化数据库
     const db = getDatabase(app);
+<script>
+    // 静音功能
+    function toggleMute() {
+        const music = document.getElementById('background-music');
+        if (music.muted) {
+            music.muted = false;
+            document.getElementById('mute-btn').innerText = '🔊';
+        } else {
+            music.muted = true;
+            document.getElementById('mute-btn').innerText = '🔇';
+        }
+    }
+
+    // 树洞留言
+    function leaveMessage() {
+        window.location.href = 'message.html?gift=tree-hole';
+    }
+
+    // 查看礼物留言
+    function viewMessage(giftNumber) {
+        db.ref(`messages/gift${giftNumber}`).once('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                alert(`礼物 ${giftNumber} 的留言：${data.message}`);
+            } else {
+                alert(`礼物 ${giftNumber} 暂无留言。`);
+            }
+        }).catch((err) => {
+            console.error('无法加载留言:', err);
+        });
+    }
 </script>
 
-        // 静音功能
-        const music = document.getElementById('background-music');
-        function toggleMute() {
-            if (music.muted) {
-                music.muted = false;
-                document.getElementById('mute-btn').innerText = '🔊';
-            } else {
-                music.muted = true;
-                document.getElementById('mute-btn').innerText = '🔇';
-            }
-        }
-
-        // 树洞留言
-        function leaveMessage() {
-            window.location.href = 'message.html?gift=tree-hole';
-        }
-
-        // 查看礼物留言
-        function viewMessage(giftNumber) {
-            db.ref(`messages/gift${giftNumber}`).once('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    alert(`礼物 ${giftNumber} 的留言：${data.message}`);
-                } else {
-                    alert(`礼物 ${giftNumber} 暂无留言。`);
-                }
-            }).catch((err) => {
-                console.error('无法加载留言:', err);
-            });
-        }
-    </script>
 </body>
 </html>
