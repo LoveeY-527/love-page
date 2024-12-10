@@ -114,24 +114,29 @@
 </div>
 
 
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
-    <script>
-        // Firebase 配置
-        const firebaseConfig = {
-            apiKey: "AIzaSyCiOIGb7-olcmwPf2PukDJFExvnYNfOU6c",
-            authDomain: "loveey-8090a.firebaseapp.com",
-            databaseURL: "https://loveey-8090a-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "loveey-8090a",
-            storageBucket: "loveey-8090a.firebasestorage.app",
-            messagingSenderId: "119161156412",
-            appId: "1:119161156412:web:88c0f409455c73df732439"
-        };
+   <script type="module">
+    // 从 Firebase SDK 中导入模块
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import { getDatabase } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
-        // 初始化 Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
+    // Firebase 配置对象
+    const firebaseConfig = {
+        apiKey: "AIzaSyCiOIGb7-olcmwPf2PukDJFExvnYNfOU6c",
+        authDomain: "loveey-8090a.firebaseapp.com",
+        databaseURL: "https://loveey-8090a-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "loveey-8090a",
+        storageBucket: "loveey-8090a.firebasestorage.app",
+        messagingSenderId: "119161156412",
+        appId: "1:119161156412:web:88c0f409455c73df732439"
+    };
+
+    // 初始化 Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // 初始化数据库
+    const db = getDatabase(app);
 </script>
+
         // 静音功能
         const music = document.getElementById('background-music');
         function toggleMute() {
